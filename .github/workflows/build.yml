@@ -8,10 +8,22 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
       - run: npm install
       - run: npm run build
+
       - run: npm install @capacitor/core @capacitor/cli @capacitor/android
-      - run: npx cap init reso-lite com.resolite.app
-    #   - run: npx cap add android
-      - run: npx cap copy
+
+      # 🔥 CLEAN + SYNC (IMPORTANT)
+      - run: npx cap sync android
+
+      # 🔥 ENSURE gradle files generated
+      - run: cd android && chmod +x gradlew
+
       - run: cd android && ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-debug
+          path: android/app/build/outputs/apk/debug/app-debug.apk
