@@ -22,9 +22,6 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
 
-    // 🔥 EXTRA SAFETY (Kotlin compatibility)
-    kotlinOptions {
-        jvmTarget = '17'
     }
 
     buildTypes {
