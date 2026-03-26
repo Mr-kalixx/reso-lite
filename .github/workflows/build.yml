@@ -12,6 +12,6 @@ jobs:
       - run: npm run build
       - run: npm install @capacitor/core @capacitor/cli @capacitor/android
       - run: npx cap init reso-lite com.resolite.app
-      - run: npx cap add android
+    #   - run: npx cap add android
       - run: npx cap copy
       - run: cd android && ./gradlew assembleDebug
