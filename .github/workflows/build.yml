@@ -14,12 +14,16 @@ jobs:
 
       - run: npm install @capacitor/core @capacitor/cli @capacitor/android
 
-      # 🔥 CLEAN + SYNC (IMPORTANT)
       - run: npx cap sync android
 
-      # 🔥 ENSURE gradle files generated
-      - run: cd android && chmod +x gradlew
+      # 🔥 ADD THIS (VERY IMPORTANT)
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
+      - run: cd android && chmod +x gradlew
       - run: cd android && ./gradlew assembleDebug
 
       - name: Upload APK
